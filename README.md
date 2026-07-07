@@ -103,9 +103,8 @@ entityresolve-js/
 
 ---
 
-## Roadmap / plano de estudo
+## Roadmap / plano de implementação
 
-Este projecto foi desenhado também como percurso de aprendizagem prática. Cada fase corresponde a um conceito de ciência da computação/engenharia de dados aplicado a um problema real:
 
 - [ ] **Fase 1 — Normalização**: regex, Unicode normalization, testes de casos limite
 - [ ] **Fase 2 — Blocking**: complexidade algorítmica (Big O), técnicas de blocking em record linkage
@@ -157,4 +156,5 @@ curl -X POST http://localhost:3000/records \
 
 ## Autor
 
-Mauro — desenvolvedor em Luanda, Angola.
+[Mauro Romão](mauro-romao.vercel.app)
+

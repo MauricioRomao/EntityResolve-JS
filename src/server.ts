@@ -1,7 +1,11 @@
 import express from "express"
+import {router} from "./Routes/index.js"
 
 
 const server = express()
+
+server.use(express.json())
+server.use(router)
 
 
 
