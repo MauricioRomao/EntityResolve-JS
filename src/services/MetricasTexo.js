@@ -1,4 +1,4 @@
-function jaroWinkler(a :string, b: string) {
+function jaroWinkler(a , b) {
   if (a === b) return 1;
 
   const tamanhoA = a.length;
