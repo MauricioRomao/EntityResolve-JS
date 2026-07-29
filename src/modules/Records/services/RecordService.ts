@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
 
-function generateBlockingKeys(surname: string, birthDate: string, bi: string): string[] {
+export function generateBlockingKeys(surname: string, birthDate: string, bi: string): string[] {
     const keys: string[] = [];
 
     const birthYear = birthDate ? new Date(birthDate).getFullYear() : null;
@@ -27,6 +27,7 @@ export const RecordServices: RequestHandler = async (req, res, next) => {
             status: "Sucesso",
             chavesGeradas: chaves
         });
+
 
     } catch (error) {
         console.error("Erro em RecordServices:", error);

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import express from "express";
 import request from "supertest";
-import { RecordValidation } from "../src/Middlewares/RecordValidation.js"; 
+import { RecordValidation } from "../src/shared/Middlewares/RecordValidation.js"; 
 
 
 const app = express();

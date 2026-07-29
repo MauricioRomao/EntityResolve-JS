@@ -1,3 +1,4 @@
+import {RecordServices,generateBlockingKeys} from "./RecordService"
 function jaroWinkler(a , b) {
   if (a === b) return 1;
 
@@ -79,10 +80,12 @@ function levenshteinNormalizado(a, b) {
 
 
 /*
-console.log(jaroWinkler("mauro  romao", "mauro antonio romao"))
 console.log(jaroWinkler("mauro ntonio romao", "mauro antonio romao"))
 console.log(jaroWinkler("mauro antonio romao", "mauro antonio romao"))
 */
+
+
+console.log(jaroWinkler("mauro antoni  romao", "mauro antonio romao"))
 
 
 export {jaroWinkler, levenshteinNormalizado}
