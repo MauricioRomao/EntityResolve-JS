@@ -4,3 +4,8 @@ export interface HttpResponse<T>{
 }
 
 
+export interface HttpRequest<B>{
+     body:B
+}
+
+

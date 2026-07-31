@@ -1,5 +1,5 @@
-import type { Records } from "../../../shared/Models/records.js";
-import  type  {IGetRecordsRepository} from "../protocols.js"
+import type { Records } from "../../../../shared/Models/records.js";
+import  type  {IGetRecordsRepository} from "../../controllers/GET/protocols.js"
 
 export class GetRecordsRepository implements IGetRecordsRepository{
    async  GetRecords(): Promise<Records[]> {

@@ -1,4 +1,4 @@
-import type { IGetRecordscontrollers, IGetRecordsRepository } from "../protocols.js";
+import type { IGetRecordscontrollers, IGetRecordsRepository } from "./protocols.js";
 
 export class getrecordsController implements IGetRecordscontrollers {
 

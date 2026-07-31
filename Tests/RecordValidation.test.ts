@@ -1,19 +1,20 @@
 import { describe, it, expect } from "vitest";
 import express from "express";
 import request from "supertest";
-import { RecordValidation } from "../src/shared/Middlewares/RecordValidation.js"; 
+import { RecordValidation } from "../src/shared/Middlewares/RecordValidation.js";
+import { generateBlockingKeys } from "../src/modules/Utils/blocking/generateBlockingKeys.js";
 
 
 const app = express();
 app.use(express.json());
-app.post("/records", RecordValidation);
+app.post("/records/record", RecordValidation);
 
 describe("Testes do Controlador RecordValidation", () => {
-    
+
     // --- CENÁRIO DE SUCESSO ---
     it("deve retornar sucesso com dados limpos quando o input for válido", async () => {
         const payloadValido = {
-            nome: "  António Manuel  ", 
+            nome: "  António Manuel  ",
             agencia: "0040",
             telefone: "+244 (923) 123-456", // 
             bi: "005152164ue043" // 
@@ -24,27 +25,27 @@ describe("Testes do Controlador RecordValidation", () => {
             .send(payloadValido);
 
         // Valida o status HTTP de sucesso
-           expect(resposta.status).toBe(200);
-        
+        expect(resposta.status).toBe(200);
+
         // Valida se a estrutura de resposta está correta
         expect(resposta.body).toHaveProperty("status", "Sucesso");
-        
+
         // Garante que a normalização (limpeza de dados) funcionou no backend
         expect(resposta.body.dados).toEqual({
             nome: "António Manuel",
             agencia: "0040",
-            telefone: "244923123456", 
-            bi: "005152164UE043" 
+            telefone: "244923123456",
+            bi: "005152164UE043"
         });
     });
-// BI curto demais (inválido)
+    // BI curto demais (inválido)
     // --- CENÁRIOS DE FALHA ---
-        it("deve falhar se o BI de Angola tiver o formato incorreto", async () => {
+    it("deve falhar se o BI de Angola tiver o formato incorreto", async () => {
         const payloadBiInvalido = {
             nome: "António Manuel",
             agencia: "0040",
             telefone: "923123456",
-            bi: "12345" 
+            bi: "12345"
         };
 
         const resposta = await request(app)
@@ -54,7 +55,7 @@ describe("Testes do Controlador RecordValidation", () => {
         expect(resposta.status).toBe(400);
         expect(resposta.body.status).toMatch(/Falha/);
     });
-                // Não começa com 9 nem com 2
+    // Não começa com 9 nem com 2
     it("deve falhar se o número de telefone não seguir as regras de Angola", async () => {
         const payloadTelefoneInvalido = {
             nome: "António Manuel",
@@ -70,10 +71,10 @@ describe("Testes do Controlador RecordValidation", () => {
         expect(resposta.status).toBe(400);
         expect(resposta.body.status).toMatch(/Falha/);
     });
-                         // Menos de 3 caracteres //
+    // Menos de 3 caracteres //
     it("deve falhar se o nome for muito curto", async () => {
         const payloadNomeInvalido = {
-            nome: "An", 
+            nome: "An",
             agencia: "0040",
             telefone: "923123456",
             bi: "005152164UE043"
@@ -87,3 +88,9 @@ describe("Testes do Controlador RecordValidation", () => {
         expect(resposta.body.status).toMatch(/Falha/);
     });
 });
+
+// Generate blocking Keys
+it("gera chave SN3 corretamente", () => {
+    const keys = generateBlockingKeys("Ferreira", "1990-05-20", "0012345")
+    expect(keys).toContain("SN3_Fer_1990")
+})

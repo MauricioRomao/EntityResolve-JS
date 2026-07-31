@@ -1,5 +1,5 @@
-import type { HttpResponse } from "../Records/controllers/protocols.js"
-import type { Records } from "../../shared/Models/records.js"
+import type { HttpResponse } from "../protocols.js"
+import type { Records } from "../../../../shared/Models/records.js"
 
 export interface IGetRecordscontrollers  {
      handle():Promise<HttpResponse<Records[]>>
